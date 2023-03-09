@@ -1,0 +1,47 @@
+package com.gascharge.taemin.redis;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Type;
+
+import static com.gascharge.taemin.util.JsonUtil.getJson;
+import static com.gascharge.taemin.util.JsonUtil.setJson;
+
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class RedisJson {
+
+    private final RedisDao redisDao;
+
+    public Object get(String key, Type javaType) {
+        String stringResult = redisDao.get(key);
+        log.info("RedisJson get key : {} ### classType : {} ### stringResult = {}", key, javaType, stringResult);
+
+        try {
+            Object json = getJson(stringResult, javaType);
+            log.info("RedisJson getJson result : {}", json);
+            return json;
+        } catch (Exception e) {
+            throw new IllegalStateException("key : " + key + " type : " + javaType + " 을 역직렬화하는데 실패했습니다.", e);
+        }
+    }
+
+    public boolean set(String key, Object data) {
+        log.info("RedisJson set key : {}, data : {}", key, data);
+        try {
+            String value = setJson(data);
+            log.info("RedisJson json : {}", value);
+            redisDao.set(key, value);
+            return true;
+        } catch (JsonProcessingException e) {
+            return false;
+        } catch (Exception e) {
+            log.error(e.toString());
+            return false;
+        }
+    }
+}
