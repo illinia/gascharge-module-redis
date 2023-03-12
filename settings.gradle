@@ -7,16 +7,6 @@ def includeProject(String moduleName, String moduleType) {
 
 [
         ["common", "common"],
-        ["jpa", "module"],
-        ["redis", "module"],
-        ["yml", "module"],
-        ["reservation", "domain"],
-        ["token", "domain"],
-        ["security", "module"],
-        ["reservation", "service"],
-        ["token", "service"],
-        ["reservation", "app"],
-        ["batch", "app"]
 ].each { subproject ->
     if ("gascharge-${subproject[1]}-${subproject[0]}" != "gascharge-module-redis") {
         includeProject(subproject[0], subproject[1])
