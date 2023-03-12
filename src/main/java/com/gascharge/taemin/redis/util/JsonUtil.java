@@ -1,4 +1,4 @@
-package com.gascharge.taemin.util;
+package com.gascharge.taemin.redis.util;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -1,4 +1,4 @@
-package com.gascharge.taemin.redis;
+package com.gascharge.taemin.redis.access;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

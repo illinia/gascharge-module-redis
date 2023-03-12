@@ -1,4 +1,4 @@
-package com.gascharge.taemin.redis;
+package com.gascharge.taemin.redis.access;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
 
-import static com.gascharge.taemin.util.JsonUtil.getJson;
-import static com.gascharge.taemin.util.JsonUtil.setJson;
+import static com.gascharge.taemin.redis.util.JsonUtil.getJson;
+import static com.gascharge.taemin.redis.util.JsonUtil.setJson;
 
 @Slf4j
 @Component

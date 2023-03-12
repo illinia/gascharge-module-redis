@@ -1,3 +1,5 @@
+generated/
+
 http-client.private.env.json
 
 application-oauth.properties

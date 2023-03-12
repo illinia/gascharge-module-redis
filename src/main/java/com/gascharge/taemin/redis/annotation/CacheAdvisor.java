@@ -1,7 +1,7 @@
-package com.gascharge.taemin.annotation;
+package com.gascharge.taemin.redis.annotation;
 
-import com.gascharge.taemin.redis.RedisDao;
-import com.gascharge.taemin.redis.RedisJson;
+import com.gascharge.taemin.redis.access.RedisDao;
+import com.gascharge.taemin.redis.access.RedisJson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -30,7 +30,7 @@ public class CacheAdvisor {
     private final RedisJson redisJson;
     private final RedisDao redisDao;
 
-    @Around("@annotation(com.gascharge.taemin.annotation.Cache)")
+    @Around("@annotation(com.gascharge.taemin.redis.annotation.Cache)")
     public Object processCacheAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Optional<String> optional = getKey(proceedingJoinPoint);
 
@@ -53,7 +53,7 @@ public class CacheAdvisor {
         return proceed;
     }
 
-    @AfterReturning(pointcut = "@annotation(com.gascharge.taemin.annotation.CachePut)", returning = "result")
+    @AfterReturning(pointcut = "@annotation(com.gascharge.taemin.redis.annotation.CachePut)", returning = "result")
     public void processCachePutAnnotation(JoinPoint joinPoint, Object result) {
         Optional<String> optional = getKey(joinPoint);
 
@@ -65,7 +65,7 @@ public class CacheAdvisor {
         if (!redisJson.set(key, result)) redisOpsFailWarn(key, result.toString(), "processCachePutAnnotation", "set");
     }
 
-    @After("@annotation(com.gascharge.taemin.annotation.CacheDelete)")
+    @After("@annotation(com.gascharge.taemin.redis.annotation.CacheDelete)")
     public void processCacheDeleteAnnotation(JoinPoint joinPoint) {
         Optional<String> optional = getKey(joinPoint);
         if (optional.isEmpty()) return;

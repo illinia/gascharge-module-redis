@@ -1,4 +1,4 @@
-package com.gascharge.taemin.annotation;
+package com.gascharge.taemin.redis.annotation;
 
 import java.lang.annotation.*;
 
