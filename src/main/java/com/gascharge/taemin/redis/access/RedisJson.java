@@ -19,11 +19,11 @@ public class RedisJson {
 
     public Object get(String key, Type javaType) {
         String stringResult = redisDao.get(key);
-        log.info("RedisJson get key : {} ### classType : {} ### stringResult = {}", key, javaType, stringResult);
+        log.debug("RedisJson get key : {} ### classType : {} ### stringResult = {}", key, javaType, stringResult);
 
         try {
             Object json = getJson(stringResult, javaType);
-            log.info("RedisJson getJson result : {}", json);
+            log.debug("RedisJson getJson result : {}", json);
             return json;
         } catch (Exception e) {
             throw new IllegalStateException("key : " + key + " type : " + javaType + " 을 역직렬화하는데 실패했습니다.", e);
@@ -31,10 +31,10 @@ public class RedisJson {
     }
 
     public boolean set(String key, Object data) {
-        log.info("RedisJson set key : {}, data : {}", key, data);
+        log.debug("RedisJson set key : {}, data : {}", key, data);
         try {
             String value = setJson(data);
-            log.info("RedisJson json : {}", value);
+            log.debug("RedisJson json : {}", value);
             redisDao.set(key, value);
             return true;
         } catch (JsonProcessingException e) {

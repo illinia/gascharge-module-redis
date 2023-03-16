@@ -46,7 +46,7 @@ public class CacheAdvisor {
 
         Object proceed = proceedingJoinPoint.proceed();
 
-        log.info("proceedingJoinPoint.proceed() = {}", proceed);
+        log.debug("proceedingJoinPoint.proceed() = {}", proceed);
 
         if (!redisJson.set(key, proceed)) redisOpsFailWarn(key, proceed.toString(), "processCacheAnnotation", "set");
 
@@ -60,7 +60,7 @@ public class CacheAdvisor {
         if (optional.isEmpty()) return;
 
         String key = optional.get();
-        log.info("processCachePutAnnotation key : {}", key);
+        log.debug("processCachePutAnnotation key : {}", key);
 
         if (!redisJson.set(key, result)) redisOpsFailWarn(key, result.toString(), "processCachePutAnnotation", "set");
     }
@@ -71,7 +71,7 @@ public class CacheAdvisor {
         if (optional.isEmpty()) return;
 
         String key = optional.get();
-        log.info("delete key : {}", key);
+        log.debug("delete key : {}", key);
 
         redisDao.del(key);
     }

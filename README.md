@@ -1,3 +1,33 @@
+# gascharge-module-redis
+
+spring boot redis, jpa, json 포함한 redis 접근 모듈
+
+@ConditionalOnMissingBean 으로 PlatformTransactionManager 동적으로 등록, 스프링 트랜잭션 사용가능
+
+@Cache, @CacheDelete, @CachePut 어노테이션으로 캐시 저장, 수정, 삭제 기능 구현
+
+Key, Value, HashKey, HashValue String Serializer 사용
+
+*common-common 모듈 의존, 독립적으로 실행 불가능*
+
+로컬, 원격 메이븐 레포지토리
+```groovy
+implementation 'com.gascharge.taemin:gascharge-module-redis:0.0.1-SNAPSHOT'
+```
+
+멀티 모듈 프로젝트
+```groovy
+// settings.gradle
+includeProject("redis", "module")
+```
+```groovy
+// build.gradle
+implementation project(":gascharge-module-redis")
+```
+
+YAML 파일 설정은 https://github.com/illinia/gascharge-module-yml 참조
+
+
 ### key, value 설정
 * key = 엔티티이름(소문자):pk 제외 식별 가능한 값
 * value = 엔티티 데이터 그대로
