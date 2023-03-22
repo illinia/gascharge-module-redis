@@ -2,9 +2,11 @@
 
 spring boot redis, jpa, json 포함한 redis 접근 모듈
 
-@ConditionalOnMissingBean 으로 PlatformTransactionManager 동적으로 등록, 스프링 트랜잭션 사용가능
-
 @Cache, @CacheDelete, @CachePut 어노테이션으로 캐시 저장, 수정, 삭제 기능 구현
+
+CacheAdvisor 클래스에서 어노테이션의 key, value 값 가져와서 레디스 캐시 확인, 저장, 수정, 삭제
+
+@ConditionalOnMissingBean 으로 PlatformTransactionManager 동적으로 등록, 스프링 트랜잭션 사용가능
 
 Key, Value, HashKey, HashValue String Serializer 사용
 
